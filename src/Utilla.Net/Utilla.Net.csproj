@@ -141,12 +141,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sockets\TcpIpUtils.cs" />
     <Compile Include="UriExtensions.cs" />
-    <Compile Include="WebMethods\HtmlUtils.cs" />
-    <Compile Include="WebMethods\WebMethodsCommunicationException.cs" />
-    <Compile Include="WebMethods\WebMethodsCommunicationUtils.cs" />
-    <Compile Include="WebMethods\WebMethodsHtmlResponseException.cs" />
-    <Compile Include="WebMethods\WebMethodsHtmlResponseObject.cs" />
-    <Compile Include="WebMethods\WebMethodsHtmlService.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
