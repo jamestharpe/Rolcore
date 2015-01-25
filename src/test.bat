@@ -1,1 +1,1 @@
-msbuild Rolcore.build /p:Configuration=Debug
+msbuild Utilla.build /p:Configuration=Debug

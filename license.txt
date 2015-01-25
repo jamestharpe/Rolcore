@@ -1,6 +1,6 @@
-Rolcore
+Utilla
 
-Copyright (C) 2011 Rollins, Inc.
+Copyright (C) 2011 Utilla Contributors
 
 		  GNU LESSER GENERAL PUBLIC LICENSE
 		       Version 2.1, February 1999

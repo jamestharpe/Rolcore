@@ -1,1 +1,1 @@
-msbuild Rolcore.build /target:Package
+msbuild Utilla.build /target:Package

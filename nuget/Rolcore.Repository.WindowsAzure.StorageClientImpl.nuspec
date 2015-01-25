@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>Rolcore.Repository.WindowsAzure.StorageClientImpl</id>
+        <id>Utilla.Repository.WindowsAzure.StorageClientImpl</id>
         <version>0.0.0.0</version>
-        <title>Rolcore Repository - Azure Table Implementation</title>
-        <authors>Rollins,Inc.</authors>
-        <owners>Rollins,Inc.</owners>
-        <licenseUrl>https://github.com/jamestharpe/Rolcore/blob/master/license.txt</licenseUrl>
-        <projectUrl>https://github.com/jamestharpe/Rolcore</projectUrl>
+        <title>Utilla Repository - Azure Table Implementation</title>
+        <authors>Utilla Contributors</authors>
+        <owners>Utilla Contributors</owners>
+        <licenseUrl>https://github.com/jamestharpe/Utilla/blob/master/license.txt</licenseUrl>
+        <projectUrl>https://github.com/jamestharpe/Utilla</projectUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
-        <description>Azure Storage Client implementation of the Rolcore's generic repository pattern.</description>
+        <description>Azure Storage Client implementation of the Utilla's generic repository pattern.</description>
         <summary />
         <releaseNotes />
-        <copyright>Rollins, Inc.</copyright>
+        <copyright>Utilla Contributors</copyright>
         <language>en-US</language>
         <tags>Utilities</tags>
         <dependencies>
-            <dependency id="Rolcore" version="0.0.0.0" />
+            <dependency id="Utilla" version="0.0.0.0" />
         </dependencies>
     </metadata>
     <files>
-		<file src="Rolcore.Repository.WindowsAzure.StorageClientImpl.dll" target="lib\net45\Rolcore.Repository.WindowsAzure.StorageClientImpl.dll" />
+		<file src="Utilla.Repository.WindowsAzure.StorageClientImpl.dll" target="lib\net45\Utilla.Repository.WindowsAzure.StorageClientImpl.dll" />
 	</files>
 </package>
