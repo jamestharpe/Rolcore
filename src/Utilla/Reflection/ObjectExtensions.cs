@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ObjectExtensions.cs" company="Utilla">
-//     Copyright © Utilla 
+//     Copyright © Utilla Contributors
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Utilla.Reflection

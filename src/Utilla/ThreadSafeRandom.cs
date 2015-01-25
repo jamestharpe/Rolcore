@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ThreadSafeRandom.cs" company="Utilla">
-//     Copyright © Utilla 
+//     Copyright © Utilla Contributors
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Utilla

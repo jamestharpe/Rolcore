@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RandomAssignmentExperimentItem.cs" company="Utilla">
-//     Copyright © Utilla 
+//     Copyright © Utilla Contributors
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Utilla.Science

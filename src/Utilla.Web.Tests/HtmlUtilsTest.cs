@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="HtmlUtilsTest.cs" company="Utilla">
-//     Copyright © Utilla 
+//     Copyright © Utilla Contributors
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Utilla.Web.Tests

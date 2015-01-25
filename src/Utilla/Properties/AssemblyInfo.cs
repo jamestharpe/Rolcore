@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AssemblyInfo.cs" company="Utilla">
-//     Copyright © Utilla 
+//     Copyright © Utilla Contributors
 // </copyright>
 //-----------------------------------------------------------------------
 using System.Reflection;
@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Utilla")]
-[assembly: AssemblyCopyright("Copyright © Utilla 2013.")]
+[assembly: AssemblyCopyright("Copyright © Utilla Contributors 2015.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

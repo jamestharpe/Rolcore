@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Utilla.Net.Tests")]
-[assembly: AssemblyCopyright("Copyright © Utilla 2013")]
+[assembly: AssemblyCopyright("Copyright © Utilla Contributors 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

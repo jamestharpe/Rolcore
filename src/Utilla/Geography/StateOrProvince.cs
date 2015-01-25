@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
 // <copyright file="StateOrProvince.cs" company="Utilla">
-//     Copyright © Utilla 
+//     Copyright © Utilla Contributors
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Utilla.Geography
