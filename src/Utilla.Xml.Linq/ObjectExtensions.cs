@@ -18,6 +18,7 @@ namespace Utilla.Xml.Linq
         /// Returns an <see cref="XElement"/> representing the specified object.
         /// </summary>
         /// <param name="o">Specifies the object to convert.</param>
+        /// <returns>An <see cref="XElement"/> representing the object.</returns>
         public static XElement ToXElement(this object o)
         {
             Contract.Requires<ArgumentNullException>(o != null, "o is null");

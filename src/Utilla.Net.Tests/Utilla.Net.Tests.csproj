@@ -123,7 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TcpIpUtilsTest.cs" />
+    <Compile Include="TcpIpUtilsTest.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilla.Net\Utilla.Net.csproj">

@@ -6,10 +6,11 @@
 
 namespace Utilla.Web.Tests
 {
-    using Utilla.Web;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
-    
+    using System.Diagnostics.CodeAnalysis;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Utilla.Web;
+
     /// <summary>
     /// Tests for <see cref="StringExtensions"/>.
     /// </summary>
@@ -43,7 +44,7 @@ namespace Utilla.Web.Tests
             Assert.IsTrue(actual);
         }
 
-        [TestMethod]
+        [TestMethod, SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
         public void ToUri_ConvertsStringToUri()
         {
             string expected = "http://www.utilla.com/";
@@ -51,21 +52,12 @@ namespace Utilla.Web.Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        [TestMethod, ExpectedException(typeof(ArgumentException)), SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
         public void ToUri_RequiresNonEmptyString()
         {
             string expected = string.Empty;
             string actual = expected.ToUri().ToString();
             Assert.AreNotEqual(expected, actual);
         }
-
-        /// <summary>
-        ///A test for ContainsHtml
-        ///</summary>
-        //TODO: negative tests
-        //[TestMethod]
-        //public void ContainsHtmlNegativeTest()
-        //{
-        //}
     }
 }

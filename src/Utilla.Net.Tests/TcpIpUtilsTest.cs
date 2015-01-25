@@ -6,20 +6,14 @@
 namespace Utilla.Tests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Utilla.Net.Sockets;
-    
-    /// <summary>
-    ///This is a test class for TcpIpUtilsTest and is intended
-    ///to contain all TcpIpUtilsTest Unit Tests
-    ///</summary>
-    [TestClass]
+
+    [TestClass, SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
     public class TcpIpUtilsTest
     {
-        /// <summary>
-        ///A test for IpStringToDouble
-        ///</summary>
-        [TestMethod]
+        [TestMethod, SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
         public void IpStringToDoubleTest()
         {
             Assert.AreEqual(TcpIpUtils.IpStringToDouble("87.252.223.255"), 1476190207);
@@ -58,34 +52,3 @@ namespace Utilla.Tests
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

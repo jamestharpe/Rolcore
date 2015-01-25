@@ -6,6 +6,7 @@
 namespace Utilla.Xml
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Xml;
     using System.Xml.Serialization;
@@ -15,11 +16,21 @@ namespace Utilla.Xml
     /// </summary>
     public static class XmlUtils
     {
+        /// <summary>
+        /// Gets the specified element from the node list.
+        /// </summary>
+        /// <param name="nodeList">The node list</param>
+        /// <param name="elementName">The name of the element to get</param>
+        /// <returns>The element's inner text.</returns>
         public static string GetElementFromNodeList(XmlNodeList nodeList, string elementName)
-        { 
+        {
             foreach (XmlNode node in nodeList)
+            {
                 if (node.Name == elementName)
+                {
                     return node.InnerText;
+                }
+            }
 
             return string.Empty;
         }
@@ -32,12 +43,13 @@ namespace Utilla.Xml
         /// <returns>An instance of <see cref="T"/> deserialized from the given XML.</returns>
         public static T DeserializeFromXml<T>(string xml)
         {
-            if (string.IsNullOrEmpty(xml))
-                throw new ArgumentException("xml is null or empty");
+            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(xml), "xml is null or empty");
 
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-            using (StringReader stream = new StringReader(xml))
+            var serializer = new XmlSerializer(typeof(T));
+            using (var stream = new StringReader(xml))
+            {
                 return (T)serializer.Deserialize(stream);
+            }
         }
     }
 }

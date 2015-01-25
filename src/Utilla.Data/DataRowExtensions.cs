@@ -3,13 +3,13 @@
 //     Copyright © Utilla Contributors
 // </copyright>
 //-----------------------------------------------------------------------
-using System.Diagnostics.Contracts;
 namespace Utilla.Data
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Data;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Utilla.Reflection;
 
@@ -57,6 +57,7 @@ namespace Utilla.Data
         /// <param name="ignoreBlankValues">When true, empty values in the source are ignored.</param>
         /// <param name="columnMap">A <see cref="NameValueCollection"/> for mapping the name of a 
         /// column in the source to the name of a property in the destination.</param>
+        /// <param name="ignoreColumnNames">A list of column names to ignore.</param>
         /// <returns>A <see cref="Dictionary{string, object}"/> of changed properties and their 
         /// original values from the destination object.</returns>
         public static Dictionary<string, object> CopyRowData(this DataRow source, object destination, bool ignoreBlankValues, NameValueCollection columnMap, params string[] ignoreColumnNames)
@@ -64,7 +65,7 @@ namespace Utilla.Data
             Contract.Requires<ArgumentNullException>(source != null, "source is null.");
             Contract.Requires<ArgumentNullException>(destination != null, "destination is null.");
             
-            ignoreColumnNames = ignoreColumnNames ?? new string[]{};
+            ignoreColumnNames = ignoreColumnNames ?? new string[] { };
             columnMap = source.Table.GetColumnMapOrDefault(columnMap);
             
             //// Map properties
@@ -79,8 +80,11 @@ namespace Utilla.Data
             {
                 var propertyName = columnMap[sourceColumnName];
                 var sourceValue = source[sourceColumnName] ?? string.Empty;
-                if ((ignoreBlankValues) && (sourceValue.ToString() == string.Empty))
+                if (ignoreBlankValues && (sourceValue.ToString() == string.Empty))
+                {
                     continue;
+                }
+
                 if (destinationProperties.Count(prop => prop.Name == propertyName) == 1)
                 {
                     result.Add(propertyName, sourceValue);
@@ -94,7 +98,7 @@ namespace Utilla.Data
 
             return result;
 
-            //TODO: Unit test
+            // TODO: Unit test
         }
     }
 }

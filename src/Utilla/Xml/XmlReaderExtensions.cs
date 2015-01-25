@@ -6,6 +6,7 @@
 namespace Utilla.Xml
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Text;
     using System.Xml;
 
@@ -21,12 +22,13 @@ namespace Utilla.Xml
         /// <returns>A string containing the contents of the specified <see cref="XmlReader"/>.</returns>
         public static string ReadToString(this XmlReader xmlReader)
         {
-            if (xmlReader == null)
-                throw new ArgumentNullException("xmlReader");
+            Contract.Requires<ArgumentException>(xmlReader != null, "xmlReader is null");
 
             var result = new StringBuilder();
             while (xmlReader.Read())
+            {
                 result.Append(xmlReader.ReadOuterXml());
+            }
 
             return result.ToString();
         }

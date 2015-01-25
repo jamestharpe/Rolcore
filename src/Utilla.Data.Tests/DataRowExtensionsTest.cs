@@ -8,6 +8,7 @@ namespace Utilla.Data.Tests
     using System;
     using System.Collections.Specialized;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Utilla.Data;
     
@@ -107,17 +108,17 @@ namespace Utilla.Data.Tests
             var result = new DataTable();
             for (int i = 0; i < this.columnNames.Length; i++)
             {
-
-                //// Different Column Names
-
+                // Different Column Names
                 var column = new DataColumn(
-                    this.columnNames[i] + DifferentTableColumnSuffix, this.columnTypes[i]);
+                    this.columnNames[i] + DifferentTableColumnSuffix, 
+                    this.columnTypes[i]);
                 result.Columns.Add(column);
 
-                //// Same Column Names
-
+                // Same Column Names
                 column = new DataColumn(
-                    this.columnNames[i], this.columnTypes[i]);
+                    this.columnNames[i], 
+                    this.columnTypes[i]);
+
                 result.Columns.Add(column);
             }
 
@@ -145,7 +146,7 @@ namespace Utilla.Data.Tests
             Assert.AreEqual(sourceRow[BoolColumnName], destRow[BoolColumnName]);
         }
 
-        [TestMethod]
+        [TestMethod, SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
         public void CopyTo_CopiesMatchingRowsByDefault()
         {
             using (var differentTable = this.CreateDifferentTable())
@@ -175,7 +176,7 @@ namespace Utilla.Data.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod, SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
         public void CopyTo_CopiesMappedColumns()
         {
             using (var differentTable = this.CreateDifferentTable())
@@ -187,7 +188,7 @@ namespace Utilla.Data.Tests
 
                 var destRow = differentTable.NewRow();
 
-                var map = new NameValueCollection(columnNames.Length);
+                var map = new NameValueCollection(this.columnNames.Length);
                 map.Add(StringColumnName, StringColumnName + DifferentTableColumnSuffix);
                 map.Add(IntColumnName, IntColumnName + DifferentTableColumnSuffix);
                 map.Add(BoolColumnName, BoolColumnName + DifferentTableColumnSuffix);
