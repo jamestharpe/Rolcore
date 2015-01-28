@@ -21,33 +21,41 @@ namespace Utilla.Web.Tests
         /// A test for ContainsHtml
         /// </summary>
         [TestMethod]
-        public void ContainsHtml_ReturnsTrueWhenStringContainsHtml()
+        public void ContainsHtml_ReturnsTrueWhenStringContainsATag()
         {
-            string s = "<a>";
-            bool actual = s.ContainsHtml();
-            Assert.IsTrue(actual);
+            Assert.IsTrue("<a>".ContainsHtml());
+            Assert.IsTrue("<a href='foobar'>".ContainsHtml());
+            Assert.IsTrue("<a href=\"foobar\">".ContainsHtml());
+            Assert.IsTrue("<a href=\"foobar\">biz baz".ContainsHtml());
+            Assert.IsTrue("<a href=\"foobar\">biz baz</a> bang!".ContainsHtml());
+        }
 
-            s = "<a href='foobar'>";
-            actual = s.ContainsHtml();
-            Assert.IsTrue(actual);
+        [TestMethod]
+        public void ContainsHtml_ReturnsTrueWhenStringContainsH1Tag()
+        {
+            Assert.IsTrue("<h1>".ContainsHtml());
+            Assert.IsTrue("<h1 id=\"foobar\">".ContainsHtml());
+            Assert.IsTrue("<h1/>".ContainsHtml());
+            Assert.IsTrue("<h1>Heading 1".ContainsHtml());
+            Assert.IsTrue("<h1>Heading 1</h1>".ContainsHtml());
+            Assert.IsTrue("<h1>Heading 1</h1> and then some".ContainsHtml());
+        }
 
-            s = "<a href=\"foobar\">";
-            actual = s.ContainsHtml();
-            Assert.IsTrue(actual);
-
-            s = "<a href=\"foobar\">biz baz";
-            actual = s.ContainsHtml();
-            Assert.IsTrue(actual);
-
-            s = "<a href=\"foobar\">biz baz</a> bang!";
-            actual = s.ContainsHtml();
-            Assert.IsTrue(actual);
+        [TestMethod]
+        public void ContainsHtml_ReturnsFalseWhenStringDoesNotContainHtml()
+        {
+            Assert.IsFalse("h1".ContainsHtml());
+            Assert.IsFalse("h1 id=\"foobar\"".ContainsHtml());
+            Assert.IsFalse("h1/".ContainsHtml());
+            Assert.IsFalse("h1 Heading 1 /h1".ContainsHtml());
+            Assert.IsFalse("A > B and B < C".ContainsHtml());
+            Assert.IsFalse("A < B and B > C".ContainsHtml());
         }
 
         [TestMethod, SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
         public void ToUri_ConvertsStringToUri()
         {
-            string expected = "http://www.utilla.com/";
+            string expected = "http://www.jamestharpe.com/";
             string actual = expected.ToUri().ToString();
             Assert.AreEqual(expected, actual);
         }
@@ -55,9 +63,8 @@ namespace Utilla.Web.Tests
         [TestMethod, ExpectedException(typeof(ArgumentException)), SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
         public void ToUri_RequiresNonEmptyString()
         {
-            string expected = string.Empty;
-            string actual = expected.ToUri().ToString();
-            Assert.AreNotEqual(expected, actual);
+            var actual = string.Empty.ToUri().ToString();
+            Assert.Fail();
         }
     }
 }

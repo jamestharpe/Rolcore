@@ -8,6 +8,7 @@ namespace Utilla.Collections.Generic
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Extension methods for <see cref="KeyValuePair"/>.
@@ -23,10 +24,7 @@ namespace Utilla.Collections.Generic
         /// <see cref="KeyValuePair{}"/>.</returns>
         public static NameValueCollection ToNameValueCollection(this KeyValuePair<string, string>[] value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value", "value is null.");
-            }
+            Contract.Requires<ArgumentNullException>(value != null, "value is null");
 
             var result = new NameValueCollection(value.Length);
             foreach (var item in value)

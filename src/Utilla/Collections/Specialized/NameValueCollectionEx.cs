@@ -88,7 +88,7 @@ namespace Utilla.Collections.Specialized
         /// <returns>A read-only instance.</returns>
         public NameValueCollectionEx ToReadOnly()
         {
-            NameValueCollectionEx result = new NameValueCollectionEx();
+            var result = new NameValueCollectionEx();
             result.Add(this);
             result.IsReadOnly = true;
             return result;

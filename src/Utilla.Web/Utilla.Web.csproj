@@ -164,7 +164,6 @@
     <Compile Include="Syndication\ISyndicationFeedProvider.cs" />
     <Compile Include="Syndication\ISyndicationItemProvider.cs" />
     <Compile Include="Syndication\SyndicationFeedExtensions.cs" />
-    <Compile Include="UI\CompeteTrackingSnippet.cs" />
     <Compile Include="UI\ControlExtensions.cs" />
     <Compile Include="UI\GoogleAnalyticsSnippet.cs" />
     <Compile Include="UI\HtmlUtils.cs" />

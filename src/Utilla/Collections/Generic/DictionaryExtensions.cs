@@ -8,6 +8,7 @@ namespace Utilla.Collections.Generic
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Diagnostics.Contracts;
     using System.Linq;
 
     /// <summary>
@@ -23,10 +24,7 @@ namespace Utilla.Collections.Generic
         /// <returns>A <see cref="NameValueCollection"/> containing the items from the dictionary.</returns>
         public static NameValueCollection ToNameValueCollection(this Dictionary<string, string> value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value", "value is null.");
-            }
+            Contract.Requires<ArgumentNullException>(value != null, "value is null");
 
             return value.ToArray().ToNameValueCollection();
         }
