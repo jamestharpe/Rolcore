@@ -24,10 +24,10 @@ namespace Utilla.Collections.Specialized
         {
             Contract.Requires<ArgumentNullException>(value != null, "value is null.");
 
-            NameValueCollectionEx result = new NameValueCollectionEx();
+            var result = new NameValueCollectionEx();
             result.Add(value);
             return result.ToReadOnly();
-        } // TODO: Test
+        }
 
         /// <summary>
         /// Creates a <see cref="NameValueCollection"/> from the specified string and seperators.
@@ -61,22 +61,25 @@ namespace Utilla.Collections.Specialized
         /// <param name="compare">The other <see cref="NameValueCollection"/> to compare.</param>
         /// <returns>True if the <see cref="NameValueCollection"/> instances are equivalent.</returns>
         public static bool IsEquivalentTo(this NameValueCollection value, NameValueCollection compare)
-        {   //TODO: Unit test
-            if(value == compare)
+        {
+            if (value == compare)
+            {
                 return true;
+            }
 
-            if ((value == null && compare != null) || (value != null && compare == null))
+            if ((value == null && compare != null) || (value != null && compare == null) || (value.Count != compare.Count))
+            {
                 return false;
-
-            if(value.Count != compare.Count)
-                return false;
+            }
 
             foreach (string key in value.AllKeys)
             {
-                string keyValue = value[key];
-                string compareValue = compare[key];
-                if(keyValue != compareValue)
+                var keyValue = value[key];
+                var compareValue = compare[key];
+                if (keyValue != compareValue)
+                {
                     return false;
+                }
             }
 
             return true;
