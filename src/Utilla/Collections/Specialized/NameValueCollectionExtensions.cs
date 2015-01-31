@@ -43,15 +43,21 @@ namespace Utilla.Collections.Specialized
         {
             Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(value), "value is null or empty.");
 
-            NameValueCollection result = new NameValueCollection();
-            string[] nameValuePairs = value.Split(new char[] { listItemSeperator });
+            var result = new NameValueCollection();
+            var nameValuePairs = value.Split(new char[] { listItemSeperator });
             for (int i = 0; i < nameValuePairs.Length; i++)
             {
-                string[] nameValue = nameValuePairs[i].Split(new char[] { keyValueSeperator });
+                var nameValue = nameValuePairs[i].Split(new char[] { keyValueSeperator });
+                if (nameValue.Length != 2)
+                {
+                    throw new NotSupportedException("Cannot convert \"" + nameValue + " to name and value.");
+                }
+
                 result.Add(nameValue[0].Trim(), nameValue[1].Trim());
             }
+
             return result;
-        } // TODO: Test
+        }
 
         /// <summary>
         /// Determines if the <see cref="NameValueCollection"/>s contain exactly the same keys and
@@ -85,7 +91,7 @@ namespace Utilla.Collections.Specialized
             return true;
         } // TODO: Test
 
-        //TODO: Document
+        // TODO: Document
         public static NameValueCollection FromKeys(this NameValueCollection collection, params string[] keys)
         {
             Contract.Requires<ArgumentNullException>(collection != null, "collection is null.");

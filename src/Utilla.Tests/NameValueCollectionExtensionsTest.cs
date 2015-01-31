@@ -19,7 +19,6 @@ namespace Utilla.Tests
         {
             var sut = (new NameValueCollection()).ToReadOnly();
             sut.Add("this should", "throw an exception");
-            Assert.Fail();
         }
 
         [TestMethod]
@@ -34,6 +33,31 @@ namespace Utilla.Tests
             Assert.AreEqual(2, sut.Count);
             Assert.AreEqual("b", sut["a"]);
             Assert.AreEqual("d", sut["c"]);
+        }
+
+        [TestMethod]
+        public void ToNameValueCollection_ConvertsStringToNameValueCollection()
+        {
+            var input = "a=b,b=c,a=c,c=d";
+            var output = input.ToNameValueCollection(',', '=');
+            Assert.AreEqual(3, output.Count);
+            Assert.AreEqual("b,c", output["a"]);
+            Assert.AreEqual("c", output["b"]);
+            Assert.AreEqual("d", output["c"]);
+        }
+
+        [TestMethod, ExpectedException(typeof(NotSupportedException))]
+        public void ToNameValueCollection_ThrowsExceptionForBlankEntries()
+        {
+            var input = "a=b,b=c,,a=c,c=d";
+            var output = input.ToNameValueCollection(',', '=');
+        }
+
+        [TestMethod, ExpectedException(typeof(NotSupportedException))]
+        public void ToNameValueCollection_ThrowsExceptionForIncorrectlyDelimitedEntries()
+        {
+            var input = "a=b,b=c,a-c,a=c,c=d";
+            var output = input.ToNameValueCollection(',', '=');
         }
     }
 }
