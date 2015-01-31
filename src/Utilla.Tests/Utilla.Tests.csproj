@@ -153,6 +153,7 @@
     <Compile Include="ByteExtensionsTest.cs" />
     <Compile Include="StringBuilderExtensionsTest.cs" />
     <Compile Include="DateTimeExtensionsTest.cs" />
+    <Compile Include="NameValueCollectionExtensionsTest.cs" />
     <Compile Include="UriExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
