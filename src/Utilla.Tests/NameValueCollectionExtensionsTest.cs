@@ -59,5 +59,59 @@ namespace Utilla.Tests
             var input = "a=b,b=c,a-c,a=c,c=d";
             var output = input.ToNameValueCollection(',', '=');
         }
+
+        [TestMethod]
+        public void IsEquivalentTo_ReturnsTrueForEmptyNameValueCollections()
+        {
+            var sut1 = new NameValueCollection();
+            var sut2 = new NameValueCollection();
+
+            Assert.IsTrue(sut1.IsEquivalentTo(sut2));
+        }
+
+        [TestMethod]
+        public void IsEquivalentTo_ReturnsTrueForSameNameValueCollections()
+        {
+            var sut1 = new NameValueCollection();
+            var sut2 = sut1;
+
+            Assert.IsTrue(sut1.IsEquivalentTo(sut2));
+        }
+
+        [TestMethod]
+        public void IsEquivalentTo_ReturnsTrueForEquivalentNameValueCollections()
+        {
+            var sut1 = (new NameValueCollection()
+            {
+                { "a", "b" },
+                { "c", "d" }
+            });
+
+            var sut2 = (new NameValueCollection()
+            {
+                { "a", "b" },
+                { "c", "d" }
+            });
+
+            Assert.IsTrue(sut1.IsEquivalentTo(sut2));
+        }
+
+        [TestMethod]
+        public void IsEquivalentTo_ReturnsFalseForUnEquivalentNameValueCollections()
+        {
+            var sut1 = (new NameValueCollection()
+            {
+                { "a", "b" },
+                { "c", "d" }
+            });
+
+            var sut2 = (new NameValueCollection()
+            {
+                { "a", "a" },
+                { "c", "d" }
+            });
+
+            Assert.IsFalse(sut1.IsEquivalentTo(sut2));
+        }
     }
 }

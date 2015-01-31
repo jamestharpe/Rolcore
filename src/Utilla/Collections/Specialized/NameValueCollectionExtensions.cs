@@ -3,11 +3,11 @@
 //     Copyright © Utilla Contributors
 // </copyright>
 //-----------------------------------------------------------------------
-using System.Diagnostics.Contracts;
 namespace Utilla.Collections.Specialized
 {
     using System;
     using System.Collections.Specialized;
+    using System.Diagnostics.Contracts;
     using System.Linq;
 
     /// <summary>
@@ -30,7 +30,7 @@ namespace Utilla.Collections.Specialized
         }
 
         /// <summary>
-        /// Creates a <see cref="NameValueCollection"/> from the specified string and seperators.
+        /// Creates a <see cref="NameValueCollection"/> from the specified string and seperator.
         /// </summary>
         /// <param name="value">Specifies the string that is to be converted to a 
         /// <see cref="NameValueCollection"/>.</param>
@@ -89,25 +89,6 @@ namespace Utilla.Collections.Specialized
             }
 
             return true;
-        } // TODO: Test
-
-        // TODO: Document
-        public static NameValueCollection FromKeys(this NameValueCollection collection, params string[] keys)
-        {
-            Contract.Requires<ArgumentNullException>(collection != null, "collection is null.");
-            Contract.Requires<ArgumentException>(keys != null && keys.Length != 0, "keys is null or empty.");
-            
-            var result = new NameValueCollection(collection.Count);
-            foreach (string key in collection)
-            {
-                if (keys.Contains(key))
-                {
-                    string value = collection[key];
-                    result.Add(key, value);
-                }
-            }
-
-            return result;
-        } // TODO: Test
+        }
     }
 }
