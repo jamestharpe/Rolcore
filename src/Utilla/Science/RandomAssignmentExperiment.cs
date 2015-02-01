@@ -21,9 +21,20 @@ namespace Utilla.Science
     {
 
         #region Constructors
-        public RandomAssignmentExperiment() { }
-        public RandomAssignmentExperiment(int capacity) : base(capacity) { }
-        public RandomAssignmentExperiment(IEnumerable<RandomAssignmentExperimentItem<T>> collection) : base(collection) { }
+        public RandomAssignmentExperiment() 
+        { 
+        }
+
+        public RandomAssignmentExperiment(int capacity) 
+            : base(capacity) 
+        {
+            Contract.Requires<ArgumentOutOfRangeException>(capacity >= 0, "capacity must be greater than or equal to zero");
+        }
+
+        public RandomAssignmentExperiment(IEnumerable<RandomAssignmentExperimentItem<T>> collection) 
+            : base(collection) 
+        { 
+        }
         #endregion Constructors
 
         /// <summary>
