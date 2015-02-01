@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -17,13 +18,10 @@ namespace Utilla.Web
         /// <returns>True if the string contains HTML.</returns>
         public static bool ContainsHtml(this string s)
         {
-            if (s == null)
-                throw new ArgumentNullException("s");
-            if (s.Length == 0)
-                return false;
+            Contract.Requires<ArgumentNullException>(s != null, "s is null");
 
-            Regex htmlTagMatcher = CommonExpressions.HtmlTag.ToRegEx(RegexOptions.IgnoreCase);
-            Match htmlTagMatch = htmlTagMatcher.Match(s);
+            var htmlTagMatcher = CommonExpressions.HtmlTag.ToRegEx(RegexOptions.IgnoreCase);
+            var htmlTagMatch = htmlTagMatcher.Match(s);
             return htmlTagMatch.Success;
         }
 
@@ -35,34 +33,8 @@ namespace Utilla.Web
             if (s.Length == 0)
                 return s;
 
-            Regex htmlTagMatcher = CommonExpressions.HtmlTag.ToRegEx(RegexOptions.IgnoreCase);
-
+            var htmlTagMatcher = CommonExpressions.HtmlTag.ToRegEx(RegexOptions.IgnoreCase);
             return htmlTagMatcher.Replace(s, String.Empty);
-        }
-
-        public static string ReplaceVariables(this string s, string variableFormat, System.Collections.Specialized.NameValueCollection data)
-        {
-            System.Text.StringBuilder result = new System.Text.StringBuilder(s);
-            
-            data.AllKeys.ToList().ForEach(key =>
-                result.Replace(String.Format(variableFormat, key), data[key])
-            );
-
-            //make sure there aren't any variables that weren't caught
-            //and if there were, replace them w/ empty strings
-
-
-            //the {0} in the formt variable will be escaped by Regex.Escape()
-            //(and we don't want that) so replace it w/ something we know won't be escaped
-            string regExPattern = String.Format(variableFormat, "~~~");
-            regExPattern = Regex.Escape(regExPattern);
-            regExPattern = regExPattern.Replace("~~~", ".*");
-
-            return Regex.Replace(
-                result.ToString(), 
-                regExPattern, 
-                String.Empty, 
-                RegexOptions.IgnoreCase);
         }
 
         public static string UrlDecode(this string s)

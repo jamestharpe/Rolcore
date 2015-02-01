@@ -17,6 +17,8 @@ namespace Utilla.Web.Tests
     [TestClass]
     public class StringExtensionsTest
     {
+        #region ContainsHtml Tests
+
         /// <summary>
         /// A test for ContainsHtml
         /// </summary>
@@ -52,6 +54,18 @@ namespace Utilla.Web.Tests
             Assert.IsFalse("A < B and B > C".ContainsHtml());
         }
 
+        #endregion ContainsHtml Tests
+
+        [TestMethod]
+        public void RemoveHtml_RemovesHtml()
+        {
+            Assert.AreEqual(
+                "Hello world!\nClick here.", 
+                "<h1>Hello world!</h1>\n<p><a href=\"http://www.jamestharpe.com/\">Click here.</a></p>".RemoveHtml());
+        }
+
+        #region ToUri Tests
+
         [TestMethod, SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed.")]
         public void ToUri_ConvertsStringToUri()
         {
@@ -66,5 +80,7 @@ namespace Utilla.Web.Tests
             var actual = string.Empty.ToUri().ToString();
             Assert.Fail();
         }
+
+        #endregion ToUri Tests
     }
 }

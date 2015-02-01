@@ -4,28 +4,36 @@ using System.Xml;
 using System.ComponentModel.Composition;
 using System;
 using System.Linq;
+using System.Diagnostics.Contracts;
 
 namespace Utilla.Web.Protocols
 {
-    [Export(typeof(Sitemap))]
     public class Sitemap : List<SitemapUrl>
     {
-        private string _Xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
-
         #region Constructors
-        public Sitemap(){ }
-        public Sitemap(int capacity) : base(capacity) { }
+        public Sitemap()
+        { 
+        }
+        
+        public Sitemap(int capacity) 
+            : base(capacity) 
+        {
+            Contract.Requires<ArgumentOutOfRangeException>(capacity >= 0, "capacity is less than zero");
+        }
+
         public Sitemap(IEnumerable<SitemapUrl> collection): base(collection){ }
         #endregion Constructors
 
         public string Xmlns
         {
-            get { return _Xmlns; }
-            set { _Xmlns = value; }
+            get;
+            set;
         }
 
         public void Write(TextWriter output)
         {
+            Contract.Requires<ArgumentNullException>(output != null, "output is null");
+
             using (XmlTextWriter writer = new XmlTextWriter(output))
             {
                 //writer.WriteStartDocument();
@@ -33,32 +41,56 @@ namespace Utilla.Web.Protocols
                 writer.WriteAttributeString("xmlns", this.Xmlns);
                 writer.WriteAttributeString("xmlns:geo", "http://www.google.com/geo/schemas/sitemap/1.0");
 
-                foreach (SitemapUrl url in this.OrderBy(item => item.Loc))
+                foreach (var url in this.OrderBy(item => item.Loc))
                 {
                     writer.WriteStartElement("url");
                     writer.WriteElementString("loc", url.Loc);
 
-                    if (!string.IsNullOrEmpty(url.LastMod))
-                        writer.WriteElementString("lastmod", url.LastMod);
-                    if (!string.IsNullOrEmpty(url.ChangeFreq))
-                        writer.WriteElementString("changefreq", url.ChangeFreq);
-                    if (!string.IsNullOrEmpty(url.Priority))
-                        writer.WriteElementString("priority", url.Priority);
-                    if (url.Loc.EndsWith(".kml")) // See http://code.google.com/apis/kml/documentation/kmlSearch.html
-                    {
-                        writer.WriteStartElement("geo:geo");
-                        writer.WriteElementString("geo:format", "kml");
-                        writer.WriteEndElement();
-                    }
+                    WriteLastMod(writer, url);
+                    WriteChangeFreq(writer, url);
+                    WritePriority(writer, url);
+                    WriteKeyholeData(writer, url);
 
                     writer.WriteEndElement();
 
                 }
 
                 writer.WriteEndElement();
-                //writer.WriteEndDocument();
-
                 writer.Flush();
+            }
+        }
+
+        private static void WriteKeyholeData(XmlTextWriter writer, SitemapUrl url)
+        {
+            if (url.Loc.EndsWith(".kml")) // See http://code.google.com/apis/kml/documentation/kmlSearch.html
+            {
+                writer.WriteStartElement("geo:geo");
+                writer.WriteElementString("geo:format", "kml");
+                writer.WriteEndElement();
+            }
+        }
+
+        private static void WritePriority(XmlTextWriter writer, SitemapUrl url)
+        {
+            if (!string.IsNullOrEmpty(url.Priority))
+            {
+                writer.WriteElementString("priority", url.Priority);
+            }
+        }
+
+        private static void WriteChangeFreq(XmlTextWriter writer, SitemapUrl url)
+        {
+            if (!string.IsNullOrEmpty(url.ChangeFreq))
+            {
+                writer.WriteElementString("changefreq", url.ChangeFreq);
+            }
+        }
+
+        private static void WriteLastMod(XmlTextWriter writer, SitemapUrl url)
+        {
+            if (!string.IsNullOrEmpty(url.LastMod))
+            {
+                writer.WriteElementString("lastmod", url.LastMod);
             }
         }
 

@@ -55,7 +55,7 @@
         <Exec Command="$(MsTestCommand)" ContinueOnError="false" />
     </Target>
 
-    <Target Name="Package" DependsOnTargets="CompileAndTest" > <!-- DependsOnTargets="CompileAndTest" -->
+    <Target Name="Package" DependsOnTargets="CompileAndTest"> <!-- DependsOnTargets="CompileAndTest" -->
         <RemoveDir Directories="@(PackageDir)"/>
         <MakeDir Directories="@(PackageDir)" />
         
@@ -72,7 +72,13 @@
             XmlFileName="@(UtillaNuSpecFile)"
             XPath="/nu:package/nu:metadata/nu:version"
             Value="%(AssemblyIdentity.Version)" />
+			
+		
     </Target>
+	
+	<Target Name="Deploy" DependsOnTargets="Package">
+		<Exec Command="nuget push Utilla.nuspec" WorkingDirectory="@(PackageDir)"/>
+	</Target>
 
     <!-- TODO: Add http://nuget.org/packages/StyleCop.MSBuild -->
     <!-- TODO: Unit test code coverage tool? -->
