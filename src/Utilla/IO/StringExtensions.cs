@@ -31,10 +31,8 @@ namespace Utilla.IO
 
             var result = new MemoryStream();
             var writer = new StreamWriter(result);
-
             writer.Write(s);
             writer.Flush();
-
             result.Position = 0;
             
             return result;

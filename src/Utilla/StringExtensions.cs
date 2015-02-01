@@ -34,6 +34,11 @@ namespace Utilla
         /// <returns>True if the string is a palindrome, otherwise false.</returns>
         public static bool IsPalindrome(this string s)
         {
+            if (string.IsNullOrWhiteSpace(s))
+            {
+                return true;
+            }
+
             var notAlphas = new Regex("[^a-z]");
             var alphas = notAlphas.Replace(s.ToLower(), string.Empty);
             var reverseAlphas = alphas.Reverse();
@@ -74,6 +79,7 @@ namespace Utilla
         /// <returns>The first part of the string.</returns>
         public static string First(this string s, int numberOfCharacters)
         {
+            Contract.Requires<ArgumentNullException>(s != null, "s is null");
             Contract.Requires<ArgumentOutOfRangeException>(numberOfCharacters >= 0, "numberOfCharacters is less than zero");
 
             if (string.IsNullOrEmpty(s))
@@ -98,6 +104,7 @@ namespace Utilla
         /// <returns><see cref="string"/>.</returns>
         public static string Repeat(this string s, int numberOfTimes)
         {
+            Contract.Requires<ArgumentNullException>(s != null, "s is null");
             Contract.Requires<ArgumentOutOfRangeException>(numberOfTimes >= 0, "numberOfTimes is less than zero");
 
             if (numberOfTimes == 0)
@@ -121,6 +128,7 @@ namespace Utilla
         /// <returns>A reversed string.</returns>
         public static string Reverse(this string s)
         {
+            Contract.Requires<ArgumentNullException>(s != null, "s is null");
             var result = s.ToCharArray();
             Array.Reverse(result);
             return new string(result);
@@ -136,12 +144,12 @@ namespace Utilla
         {
             Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(s), "s is null or empty");
 
-            Uri result = (baseUri == null)
+            var result = (baseUri == null)
                 ? new Uri(s, UriKind.RelativeOrAbsolute) // the constructor will error if it's passed a relative path but not specified as such
                 : new Uri(baseUri, s);
 
             return result;
-        } // TODO: Test
+        }
 
         /// <summary>
         /// Computes a SHA-1 hash of the specified <see cref="string"/>.

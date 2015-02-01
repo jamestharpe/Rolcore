@@ -26,15 +26,17 @@ namespace Utilla.IO
                 var result = reader.ReadToEnd();
                 return result;
             }
-        } // TODO: Test
+        }
 
         public static string ToSHA1String(this Stream stream)
         {
+            Contract.Requires<ArgumentNullException>(stream != null, "stream is null");
+
             using (var sha1Provider = new SHA1CryptoServiceProvider())
             {
                 var result = sha1Provider.ComputeHash(stream).ToHexString();
                 return result;
             }
-        } // TODO: Test
+        }
     }
 }
